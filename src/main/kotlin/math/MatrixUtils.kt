@@ -26,7 +26,7 @@ class MatrixUtils {
 
         fun bringMatrixToValidForm(matrix: Matrix) : Boolean {
             for (i in 0..<matrix.getDimension()) {
-                if (matrix.getMatrixElement(i, i) != BigDecimal.ZERO.setScale(matrix.getValueScale())) {
+                if (matrix.getMatrixElement(i, i) == BigDecimal.ZERO.setScale(matrix.getValueScale())) {
                     var swappedSuccess = false
                     for (j in 0..<matrix.getDimension()) {
                         if (matrix.getMatrixElement(i, j) != BigDecimal.ZERO.setScale(matrix.getValueScale())) {
