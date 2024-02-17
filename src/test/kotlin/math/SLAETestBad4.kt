@@ -33,6 +33,7 @@ class SLAETestBad4 {
         testMatrix.setMatrixElement(3, 1, "0")
         testMatrix.setMatrixElement(3, 2, "0")
         testMatrix.setMatrixElement(3, 3, "0")
+
         val testExtendedMatrix = ExtendedMatrix(testMatrix)
         testExtendedMatrix.setExtendedVector(
             arrayOf(
@@ -42,6 +43,7 @@ class SLAETestBad4 {
                 BigDecimal("0"),
             )
         )
+
         slae = SLAE(testExtendedMatrix)
     }
 

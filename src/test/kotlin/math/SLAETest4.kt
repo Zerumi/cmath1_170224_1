@@ -21,6 +21,7 @@ class SLAETest4 {
         testMatrix.setMatrixElement(0, 1, "2")
         testMatrix.setMatrixElement(1, 0, "2")
         testMatrix.setMatrixElement(1, 1, "1")
+
         val testExtendedMatrix = ExtendedMatrix(testMatrix)
         testExtendedMatrix.setExtendedVector(
             arrayOf(
@@ -28,6 +29,7 @@ class SLAETest4 {
                 BigDecimal("9"),
             )
         )
+
         slae = SLAE(testExtendedMatrix)
     }
 
