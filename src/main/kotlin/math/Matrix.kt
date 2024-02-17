@@ -114,7 +114,7 @@ open class Matrix(private val dim: Int, private val dimY : Int = dim, private va
             matrixArray[row1][i] = matrixArray[row2][i]
             matrixArray[row2][i] = temp
         }
-        swapCount++;
+        swapCount++
     }
 
     fun swapCols(
@@ -126,7 +126,7 @@ open class Matrix(private val dim: Int, private val dimY : Int = dim, private va
             matrixArray[i][col1] = matrixArray[i][col2]
             matrixArray[i][col2] = temp
         }
-        swapCount++;
+        swapCount++
     }
 
     fun mapRow(
