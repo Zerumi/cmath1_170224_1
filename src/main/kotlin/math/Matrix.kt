@@ -12,7 +12,15 @@ import java.math.RoundingMode
  * @since 1.0
  * @author Zerumi
  */
-class Matrix(private val dim : Int, private val scale : Int = 32) {
+open class Matrix(private val dim : Int, private val scale : Int = 32) {
+
+    protected constructor(matrix: Matrix) : this(matrix.dim, matrix.scale) {
+        for (i in 0..<matrix.dim) {
+            for (j in 0..<matrix.dim) {
+                matrixArray[i][j] = matrix.getMatrixElement(i,j)
+            }
+        }
+    }
 
     private val matrixArray: Array<Array<BigDecimal>> =
         Array(dim) {
@@ -25,6 +33,10 @@ class Matrix(private val dim : Int, private val scale : Int = 32) {
         return dim
     }
 
+    fun getValueScale() : Int {
+        return scale
+    }
+
     fun getMatrixElement(row: Int,
                          col: Int) : BigDecimal {
         return matrixArray[row][col]
@@ -34,6 +46,12 @@ class Matrix(private val dim : Int, private val scale : Int = 32) {
                          col : Int,
                          element : String) {
         matrixArray[row][col] = BigDecimal(element).setScale(scale)
+    }
+
+    protected fun setMatrixElement(row : Int,
+                                  col : Int,
+                                  element : BigDecimal) {
+        matrixArray[row][col] = element.setScale(scale)
     }
 
     fun getMatrixRow(row: Int) : Array<BigDecimal> {
@@ -55,6 +73,12 @@ class Matrix(private val dim : Int, private val scale : Int = 32) {
                      vector: Array<BigDecimal>) {
         for (i in 0..<dim) {
             matrixArray[i][col] = vector[i]
+        }
+    }
+
+    protected fun addMatrixCol(vector: Array<BigDecimal>) {
+        for (i in 0..<dim) {
+            matrixArray[i] = matrixArray[i].plus(vector[i])
         }
     }
 
@@ -90,7 +114,7 @@ class Matrix(private val dim : Int, private val scale : Int = 32) {
         }
     }
 
-    fun applyVectorToRow(row : Int,
+    open fun applyVectorToRow(row : Int,
                          vector : Array<BigDecimal>,
                          operation : (BigDecimal, BigDecimal) -> BigDecimal) {
 
@@ -99,7 +123,7 @@ class Matrix(private val dim : Int, private val scale : Int = 32) {
         }
     }
 
-    fun printMatrix() {
+    open fun printMatrix() {
         for (i in 0..<dim) {
             for (j in 0..<dim) {
                 print("${matrixArray[i][j].setScale(2, RoundingMode.FLOOR).toPlainString()} ")
