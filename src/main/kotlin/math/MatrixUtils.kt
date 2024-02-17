@@ -23,5 +23,38 @@ class MatrixUtils {
                 }
             }
         }
+
+        fun bringMatrixToValidForm(matrix: Matrix) : Boolean {
+            for (i in 0..<matrix.getDimension()) {
+                if (matrix.getMatrixElement(i, i) != BigDecimal.ZERO.setScale(matrix.getValueScale())) {
+                    var swappedSuccess = false
+                    for (j in 0..<matrix.getDimension()) {
+                        if (matrix.getMatrixElement(i, j) != BigDecimal.ZERO.setScale(matrix.getValueScale())) {
+                            if (matrix.getMatrixElement(j, i) != BigDecimal.ZERO.setScale(matrix.getValueScale())) {
+                                matrix.swapCols(i, j)
+                                swappedSuccess = true
+                                break
+                            }
+                        }
+                    }
+                    if (!swappedSuccess) return false
+                }
+            }
+            return true
+        }
+
+        fun matrixDeterminant(matrix: Matrix): BigDecimal {
+            val matrixClone = Matrix(matrix)
+            if (!bringMatrixToValidForm(matrixClone))
+                return BigDecimal.ZERO.setScale(matrix.getValueScale())
+            diagMatrix(matrixClone)
+            var result = BigDecimal("1").setScale(matrix.getValueScale())
+            for (i in 0..<matrixClone.getDimension()) {
+                result = result.multiply(matrixClone.getMatrixElement(i, i))
+                    .setScale(matrixClone.getValueScale(), RoundingMode.FLOOR)
+            }
+            if (matrixClone.getSwapCount() % 2 != 0) result = result.negate()
+            return result
+        }
     }
 }

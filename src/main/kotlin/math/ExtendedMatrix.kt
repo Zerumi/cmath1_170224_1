@@ -5,16 +5,21 @@ import java.math.RoundingMode
 
 class ExtendedMatrix(
     matrix: Matrix,
-    solutionVector: Array<BigDecimal>
 ) : Matrix(matrix) {
     private fun extendMatrix(array: Array<BigDecimal>) {
         this.addMatrixCol(array)
     }
 
     init {
-        for (i in 0..<matrix.getDimension())
-            solutionVector[i].setScale(matrix.getValueScale())
-        extendMatrix(solutionVector)
+        extendMatrix(Array(matrix.getDimension()) {
+            BigDecimal("0").setScale(matrix.getValueScale())
+        })
+    }
+
+    constructor(matrix: ExtendedMatrix) : this(matrix as Matrix)
+
+    fun setExtendedVector(vector: Array<BigDecimal>) {
+        this.setMatrixCol(this.getDimension(), vector)
     }
 
     override fun applyVectorToRow(

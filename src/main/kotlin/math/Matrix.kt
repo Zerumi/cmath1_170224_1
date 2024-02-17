@@ -5,29 +5,40 @@ import java.math.BigInteger
 import java.math.RoundingMode
 
 /***
- * Represents a square matrix.
+ * Represents a matrix.
  * Provided basic methods to swap rows and columns.
  * !!! Designed for indexes started from 0.
  *
  * @since 1.0
  * @author Zerumi
  */
-open class Matrix(private val dim: Int, private val scale: Int = 32) {
+open class Matrix(private val dim: Int, private val dimY : Int = dim, private val scale: Int = 32) {
 
-    protected constructor(matrix: Matrix) : this(matrix.dim, matrix.scale) {
-        for (i in 0..<matrix.dim) {
-            for (j in 0..<matrix.dim) {
+    constructor(matrix: Matrix) : this(
+        matrix.matrixArray.size,
+        matrix.matrixArray[0].size,
+        matrix.scale
+    ) {
+        for (i in 0..<matrix.matrixArray.size) {
+            for (j in 0..<matrix.matrixArray[i].size) {
                 matrixArray[i][j] = matrix.getMatrixElement(i, j)
             }
         }
+        swapCount = matrix.getSwapCount()
     }
 
     private val matrixArray: Array<Array<BigDecimal>> =
         Array(dim) {
-            Array(dim) {
+            Array(dimY) {
                 BigDecimal(BigInteger("0"), scale)
             }
         }
+
+    private var swapCount = 0
+
+    fun getSwapCount() : Int {
+        return swapCount
+    }
 
     fun getDimension(): Int {
         return dim
@@ -49,7 +60,7 @@ open class Matrix(private val dim: Int, private val scale: Int = 32) {
         col: Int,
         element: String
     ) {
-        matrixArray[row][col] = BigDecimal(element).setScale(scale)
+        matrixArray[row][col] = BigDecimal(element).setScale(scale, RoundingMode.FLOOR)
     }
 
     protected fun setMatrixElement(
@@ -57,7 +68,7 @@ open class Matrix(private val dim: Int, private val scale: Int = 32) {
         col: Int,
         element: BigDecimal
     ) {
-        matrixArray[row][col] = element.setScale(scale)
+        matrixArray[row][col] = element.setScale(scale, RoundingMode.FLOOR)
     }
 
     fun getMatrixRow(row: Int): Array<BigDecimal> {
@@ -103,6 +114,7 @@ open class Matrix(private val dim: Int, private val scale: Int = 32) {
             matrixArray[row1][i] = matrixArray[row2][i]
             matrixArray[row2][i] = temp
         }
+        swapCount++;
     }
 
     fun swapCols(
@@ -114,6 +126,7 @@ open class Matrix(private val dim: Int, private val scale: Int = 32) {
             matrixArray[i][col1] = matrixArray[i][col2]
             matrixArray[i][col2] = temp
         }
+        swapCount++;
     }
 
     fun mapRow(
