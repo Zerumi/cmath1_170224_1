@@ -11,9 +11,11 @@ class ExtendedMatrix(
     }
 
     init {
-        extendMatrix(Array(matrix.getDimension()) {
-            BigDecimal("0").setScale(matrix.getValueScale())
-        })
+        if (matrix !is ExtendedMatrix) {
+            extendMatrix(Array(matrix.getDimension()) {
+                BigDecimal("0").setScale(matrix.getValueScale())
+            })
+        }
     }
 
     constructor(matrix: ExtendedMatrix) : this(matrix as Matrix)
