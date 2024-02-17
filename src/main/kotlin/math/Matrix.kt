@@ -12,12 +12,12 @@ import java.math.RoundingMode
  * @since 1.0
  * @author Zerumi
  */
-class Matrix(private val dim : Int) {
+class Matrix(private val dim : Int, private val scale : Int = 32) {
 
     private val matrixArray: Array<Array<BigDecimal>> =
         Array(dim) {
             Array(dim) {
-                BigDecimal(BigInteger("0"), 32)
+                BigDecimal(BigInteger("0"), scale)
             }
         }
 
@@ -32,8 +32,8 @@ class Matrix(private val dim : Int) {
 
     fun setMatrixElement(row : Int,
                          col : Int,
-                         element : BigDecimal) {
-        matrixArray[row][col] = element
+                         element : String) {
+        matrixArray[row][col] = BigDecimal(element).setScale(scale)
     }
 
     fun getMatrixRow(row: Int) : Array<BigDecimal> {
