@@ -9,7 +9,7 @@ class MatrixUtils {
             assert(matrix.getMatrixElement(0,0) != BigDecimal("0"))
 
             for (i in 0..<matrix.getDimension()) {
-                for (j in (i + 1)..<matrix.getDimension()) {
+                for (j in i + 1..<matrix.getDimension()) {
                     val firstVector = matrix.getMatrixRow(i)
 
                     val removingCoefficient = matrix.getMatrixElement(j, i)
