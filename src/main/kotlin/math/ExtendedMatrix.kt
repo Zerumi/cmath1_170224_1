@@ -37,7 +37,7 @@ class ExtendedMatrix(
     override fun printMatrix() {
         for (i in 0..<this.getDimension()) {
             for (j in 0..this.getDimension()) {
-                print("${this.getMatrixElement(i, j).setScale(2, RoundingMode.FLOOR).toPlainString()} ")
+                print("${this.getMatrixElement(i, j).setScale(2, RoundingMode.HALF_UP).toPlainString()} ")
             }
             println()
         }

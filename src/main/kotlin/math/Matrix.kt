@@ -60,7 +60,7 @@ open class Matrix(private val dim: Int, private val dimY : Int = dim, private va
         col: Int,
         element: String
     ) {
-        matrixArray[row][col] = BigDecimal(element).setScale(scale, RoundingMode.FLOOR)
+        matrixArray[row][col] = BigDecimal(element).setScale(scale, RoundingMode.HALF_UP)
     }
 
     protected fun setMatrixElement(
@@ -68,7 +68,7 @@ open class Matrix(private val dim: Int, private val dimY : Int = dim, private va
         col: Int,
         element: BigDecimal
     ) {
-        matrixArray[row][col] = element.setScale(scale, RoundingMode.FLOOR)
+        matrixArray[row][col] = element.setScale(scale, RoundingMode.HALF_UP)
     }
 
     fun getMatrixRow(row: Int): Array<BigDecimal> {
@@ -161,7 +161,7 @@ open class Matrix(private val dim: Int, private val dimY : Int = dim, private va
     open fun printMatrix() {
         for (i in 0..<dim) {
             for (j in 0..<dim) {
-                print("${matrixArray[i][j].setScale(2, RoundingMode.FLOOR).toPlainString()} ")
+                print("${matrixArray[i][j].setScale(2, RoundingMode.HALF_UP).toPlainString()} ")
             }
             println()
         }

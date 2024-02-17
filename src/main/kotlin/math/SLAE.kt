@@ -10,10 +10,10 @@ class SLAE(
     fun solveSLAE(): SLAESolution {
 
         if (!MatrixUtils.bringMatrixToValidForm(matrix))
-            return SLAESolution.invalidMatrix()
+            return SLAESolution.invalidMatrix(matrix)
 
         MatrixUtils.diagMatrix(matrix)
-        return SLAESolution.ok(solveForDiagMatrix())
+        return SLAESolution.ok(matrix, solveForDiagMatrix())
     }
 
     private fun solveForDiagMatrix(): Array<BigDecimal> {
@@ -27,12 +27,12 @@ class SLAE(
             for (j in i + 1..<matrix.getDimension()) {
                 sum = sum.add(
                     matrix.getMatrixElement(i, j).multiply(solution[j])
-                        .setScale(matrix.getValueScale(), RoundingMode.FLOOR)
+                        .setScale(matrix.getValueScale(), RoundingMode.HALF_UP)
                 )
             }
 
             solution[i] = matrix.getMatrixElement(i, matrix.getDimension()).subtract(sum)
-                .divide(matrix.getMatrixElement(i, i), RoundingMode.FLOOR)
+                .divide(matrix.getMatrixElement(i, i), RoundingMode.HALF_UP)
         }
 
         return solution

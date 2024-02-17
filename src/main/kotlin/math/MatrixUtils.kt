@@ -13,7 +13,7 @@ class MatrixUtils {
                     val firstVector = matrix.getMatrixRow(i)
 
                     val removingCoefficient = matrix.getMatrixElement(j, i)
-                        .divide(matrix.getMatrixElement(i, i), RoundingMode.FLOOR).negate()
+                        .divide(matrix.getMatrixElement(i, i), RoundingMode.HALF_UP).negate()
 
                     val modifiedVector = firstVector.map {
                         it.multiply(removingCoefficient)
@@ -51,7 +51,7 @@ class MatrixUtils {
             var result = BigDecimal("1").setScale(matrix.getValueScale())
             for (i in 0..<matrixClone.getDimension()) {
                 result = result.multiply(matrixClone.getMatrixElement(i, i))
-                    .setScale(matrixClone.getValueScale(), RoundingMode.FLOOR)
+                    .setScale(matrixClone.getValueScale(), RoundingMode.HALF_UP)
             }
             if (matrixClone.getSwapCount() % 2 != 0) result = result.negate()
             return result
