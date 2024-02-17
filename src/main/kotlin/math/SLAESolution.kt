@@ -15,6 +15,18 @@ data class SLAESolution(
             return SLAESolution(SLAESolutionStatus.OK, sourceSystem, solution)
         }
 
+        fun incompatible(
+            sourceSystem: ExtendedMatrix
+        ): SLAESolution {
+            return SLAESolution(SLAESolutionStatus.INCOMPATIBLE, sourceSystem, emptyArray())
+        }
+
+        fun infiniteSolutions(
+            sourceSystem: ExtendedMatrix
+        ): SLAESolution {
+            return SLAESolution(SLAESolutionStatus.INFINITE_SOLUTIONS, sourceSystem, emptyArray())
+        }
+
         fun invalidMatrix(sourceSystem: ExtendedMatrix): SLAESolution {
             return SLAESolution(SLAESolutionStatus.INVALID_MATRIX, sourceSystem, emptyArray())
         }

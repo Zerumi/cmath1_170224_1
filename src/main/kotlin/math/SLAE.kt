@@ -7,12 +7,20 @@ class SLAE(
     sourceMatrix: ExtendedMatrix
 ) {
     private val matrix = ExtendedMatrix(sourceMatrix)
+
     fun solveSLAE(): SLAESolution {
 
         if (!MatrixUtils.bringMatrixToValidForm(matrix))
             return SLAESolution.invalidMatrix(matrix)
 
         MatrixUtils.diagMatrix(matrix)
+
+        if (MatrixUtils.checkZeroVectors(matrix))
+            return SLAESolution.infiniteSolutions(matrix)
+
+        if (MatrixUtils.checkZeroInSquare(matrix))
+            return SLAESolution.incompatible(matrix)
+
         return SLAESolution.ok(matrix, solveForDiagMatrix())
     }
 
