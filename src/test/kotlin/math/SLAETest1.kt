@@ -12,7 +12,7 @@ import kotlin.test.BeforeTest
 
 class SLAETest1 {
 
-    private lateinit var SLAE: SLAE
+    private lateinit var slae: SLAE
 
     @BeforeTest
     fun init() {
@@ -34,7 +34,7 @@ class SLAETest1 {
                 BigDecimal("6"),
             )
         )
-        SLAE = SLAE(testExtendedMatrix)
+        slae = SLAE(testExtendedMatrix)
     }
 
     @Test
@@ -48,7 +48,7 @@ class SLAETest1 {
             BigDecimal("1").setScale(32),
         )
 
-        assertEquals(expectedResult, SLAE.solveSLAE().status)
-        assertArrayEquals(expected, SLAE.solveSLAE().solutionVector)
+        assertEquals(expectedResult, slae.solveSLAE().status)
+        assertArrayEquals(expected, slae.solveSLAE().solutionVector)
     }
 }
