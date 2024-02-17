@@ -4,15 +4,19 @@ import java.math.BigDecimal
 
 data class SLAESolution(
     val status: SLAESolutionStatus,
+    val sourceSystem : ExtendedMatrix,
     val solutionVector: Array<BigDecimal>
 ) {
     companion object {
-        fun ok(solution: Array<BigDecimal>): SLAESolution {
-            return SLAESolution(SLAESolutionStatus.OK, solution)
+        fun ok(
+            sourceSystem: ExtendedMatrix,
+            solution: Array<BigDecimal>
+        ): SLAESolution {
+            return SLAESolution(SLAESolutionStatus.OK, sourceSystem, solution)
         }
 
-        fun invalidMatrix(): SLAESolution {
-            return SLAESolution(SLAESolutionStatus.INVALID_MATRIX, emptyArray())
+        fun invalidMatrix(sourceSystem: ExtendedMatrix): SLAESolution {
+            return SLAESolution(SLAESolutionStatus.INVALID_MATRIX, sourceSystem, emptyArray())
         }
     }
 
