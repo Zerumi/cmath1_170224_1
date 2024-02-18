@@ -35,9 +35,9 @@ class MatrixUtils {
                 if (matrix.getMatrixElement(i, i) == BigDecimal.ZERO.setScale(matrix.getValueScale())) {
                     var swappedSuccess = false
                     for (j in 0..<matrix.getDimension()) {
-                        if (matrix.getMatrixElement(i, j) != BigDecimal.ZERO.setScale(matrix.getValueScale())) {
-                            if (matrix.getMatrixElement(j, i) != BigDecimal.ZERO.setScale(matrix.getValueScale())) {
-                                matrix.swapCols(i, j)
+                        if (matrix.getMatrixElement(j, i) != BigDecimal.ZERO.setScale(matrix.getValueScale())) {
+                            if (matrix.getMatrixElement(i, j) != BigDecimal.ZERO.setScale(matrix.getValueScale())) {
+                                matrix.swapRows(i, j)
                                 swappedSuccess = true
                                 break
                             }

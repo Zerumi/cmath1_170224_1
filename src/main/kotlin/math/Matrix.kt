@@ -109,7 +109,7 @@ open class Matrix(private val dim: Int, private val dimY : Int = dim, private va
         row1: Int,
         row2: Int
     ) {
-        for (i in 0..<dim) {
+        for (i in 0..<matrixArray[row1].size) {
             val temp = matrixArray[row1][i]
             matrixArray[row1][i] = matrixArray[row2][i]
             matrixArray[row2][i] = temp
