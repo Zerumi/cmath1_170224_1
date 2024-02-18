@@ -17,16 +17,16 @@ class SLAETest6 {
     fun init() {
         val testMatrix = Matrix(2)
 
-        testMatrix.setMatrixElement(0, 0, "5")
-        testMatrix.setMatrixElement(0, 1, "2")
-        testMatrix.setMatrixElement(1, 0, "2")
-        testMatrix.setMatrixElement(1, 1, "1")
+        testMatrix.setMatrixElement(0, 0, "2")
+        testMatrix.setMatrixElement(0, 1, "1")
+        testMatrix.setMatrixElement(1, 0, "5")
+        testMatrix.setMatrixElement(1, 1, "2")
 
         val testExtendedMatrix = ExtendedMatrix(testMatrix)
         testExtendedMatrix.setExtendedVector(
             arrayOf(
-                BigDecimal("7"),
                 BigDecimal("9"),
+                BigDecimal("7"),
             )
         )
 

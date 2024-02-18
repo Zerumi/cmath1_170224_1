@@ -17,6 +17,7 @@ class SLAETest4 {
     @BeforeTest
     fun init() {
         val testMatrix = Matrix(2)
+
         testMatrix.setMatrixElement(0, 0, "5")
         testMatrix.setMatrixElement(0, 1, "2")
         testMatrix.setMatrixElement(1, 0, "2")
