@@ -17,7 +17,7 @@ fun main(args: Array<String>) {
 
         println("Welcome to SLAE solver program")
         println("Select input format: file/console (console by default)")
-        print(">[f/c]: ")
+        print("> [f/c]: ")
 
         val fileAnswer = readln()
 
