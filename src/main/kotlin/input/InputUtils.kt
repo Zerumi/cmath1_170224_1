@@ -7,7 +7,7 @@ import java.math.BigDecimal
 class InputUtils {
     companion object {
         fun makeMatrixFromInput(dimension : Int, scale : Int = 32, input : List<String>) : ExtendedMatrix {
-            val resultMatrix = Matrix(dimension, scale)
+            val resultMatrix = Matrix(dim = dimension, scale = scale)
             val resultExtendedVector = Array<BigDecimal>(dimension) { BigDecimal.ZERO }
 
             for (i in 0..<dimension) {

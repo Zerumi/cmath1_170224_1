@@ -35,6 +35,6 @@ class FileInputMatrix() : InputMatrix {
 
         val dimension = splitLine0[0].toInt()
 
-        return InputUtils.makeMatrixFromInput(dimension, scale, lines)
+        return InputUtils.makeMatrixFromInput(dimension, scale, lines.subList(1, lines.size))
     }
 }
