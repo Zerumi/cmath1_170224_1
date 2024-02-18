@@ -13,7 +13,7 @@ class SLAE(
         if (!MatrixUtils.bringMatrixToValidForm(matrix))
             return SLAESolution.invalidMatrix(matrix)
 
-        MatrixUtils.diagMatrix(matrix)
+        MatrixUtils.triangleMatrix(matrix)
 
         if (MatrixUtils.checkZeroVectors(matrix))
             return SLAESolution.infiniteSolutions(matrix)

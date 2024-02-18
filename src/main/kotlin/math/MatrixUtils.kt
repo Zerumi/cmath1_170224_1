@@ -5,7 +5,7 @@ import java.math.RoundingMode
 
 class MatrixUtils {
     companion object {
-        fun diagMatrix(matrix: Matrix) {
+        fun triangleMatrix(matrix: Matrix) {
             assert(matrix.getMatrixElement(0, 0) != BigDecimal("0").setScale(matrix.getValueScale()))
 
             for (i in 0..<matrix.getDimension()) {
@@ -53,7 +53,7 @@ class MatrixUtils {
             val matrixClone = Matrix(matrix)
             if (!bringMatrixToValidForm(matrixClone))
                 return BigDecimal.ZERO.setScale(matrix.getValueScale())
-            diagMatrix(matrixClone)
+            triangleMatrix(matrixClone)
             var result = BigDecimal("1").setScale(matrix.getValueScale())
             for (i in 0..<matrixClone.getDimension()) {
                 result = result.multiply(matrixClone.getMatrixElement(i, i))
