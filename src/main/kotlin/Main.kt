@@ -50,9 +50,11 @@ fun main(args : Array<String>) {
     })
 
     if (solution.status == SLAESolutionStatus.OK) {
-        println("Solution: {${solution.solutionVector.contentToString()}}")
-        println()
         val checker = SLAESolutionChecker(solution)
-        println("Error: {${checker.calculateResidualVector().contentToString()}}")
+        val errorArray = checker.calculateResidualVector()
+        println("Solution | Residual Error: ")
+        for (i in solution.solutionVector.indices) {
+            println("x${i+1}: ${solution.solutionVector[i].toPlainString()} | ${errorArray[i].toPlainString()}")
+        }
     }
 }
