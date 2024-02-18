@@ -12,12 +12,10 @@ import java.math.RoundingMode
  * @since 1.0
  * @author Zerumi
  */
-open class Matrix(private val dim: Int, private val dimY : Int = dim, private val scale: Int = 32) {
+open class Matrix(private val dim: Int, private val dimY: Int = dim, private val scale: Int = 32) {
 
     constructor(matrix: Matrix) : this(
-        matrix.matrixArray.size,
-        matrix.matrixArray[0].size,
-        matrix.scale
+        matrix.matrixArray.size, matrix.matrixArray[0].size, matrix.scale
     ) {
         for (i in 0..<matrix.matrixArray.size) {
             for (j in 0..<matrix.matrixArray[i].size) {
@@ -27,16 +25,15 @@ open class Matrix(private val dim: Int, private val dimY : Int = dim, private va
         swapCount = matrix.getSwapCount()
     }
 
-    private val matrixArray: Array<Array<BigDecimal>> =
-        Array(dim) {
-            Array(dimY) {
-                BigDecimal(BigInteger("0"), scale)
-            }
+    private val matrixArray: Array<Array<BigDecimal>> = Array(dim) {
+        Array(dimY) {
+            BigDecimal(BigInteger("0"), scale)
         }
+    }
 
     private var swapCount = 0
 
-    fun getSwapCount() : Int {
+    fun getSwapCount(): Int {
         return swapCount
     }
 
@@ -49,24 +46,19 @@ open class Matrix(private val dim: Int, private val dimY : Int = dim, private va
     }
 
     fun getMatrixElement(
-        row: Int,
-        col: Int
+        row: Int, col: Int
     ): BigDecimal {
         return matrixArray[row][col]
     }
 
     fun setMatrixElement(
-        row: Int,
-        col: Int,
-        element: String
+        row: Int, col: Int, element: String
     ) {
         matrixArray[row][col] = BigDecimal(element).setScale(scale, RoundingMode.HALF_UP)
     }
 
     protected fun setMatrixElement(
-        row: Int,
-        col: Int,
-        element: BigDecimal
+        row: Int, col: Int, element: BigDecimal
     ) {
         matrixArray[row][col] = element.setScale(scale, RoundingMode.HALF_UP)
     }
@@ -82,15 +74,13 @@ open class Matrix(private val dim: Int, private val dimY : Int = dim, private va
     }
 
     fun setMatrixRow(
-        row: Int,
-        vector: Array<BigDecimal>
+        row: Int, vector: Array<BigDecimal>
     ) {
         matrixArray[row] = vector
     }
 
     fun setMatrixCol(
-        col: Int,
-        vector: Array<BigDecimal>
+        col: Int, vector: Array<BigDecimal>
     ) {
         for (i in 0..<dim) {
             matrixArray[i][col] = vector[i]
@@ -106,8 +96,7 @@ open class Matrix(private val dim: Int, private val dimY : Int = dim, private va
     }
 
     fun swapRows(
-        row1: Int,
-        row2: Int
+        row1: Int, row2: Int
     ) {
         for (i in 0..<matrixArray[row1].size) {
             val temp = matrixArray[row1][i]
@@ -118,8 +107,7 @@ open class Matrix(private val dim: Int, private val dimY : Int = dim, private va
     }
 
     fun swapCols(
-        col1: Int,
-        col2: Int
+        col1: Int, col2: Int
     ) {
         for (i in 0..<dim) {
             val temp = matrixArray[i][col1]
@@ -130,8 +118,7 @@ open class Matrix(private val dim: Int, private val dimY : Int = dim, private va
     }
 
     fun mapRow(
-        row: Int,
-        mapFunction: (BigDecimal) -> BigDecimal
+        row: Int, mapFunction: (BigDecimal) -> BigDecimal
     ) {
         for (i in 0..<dim) {
             matrixArray[row][i] = mapFunction(matrixArray[row][i])
@@ -139,8 +126,7 @@ open class Matrix(private val dim: Int, private val dimY : Int = dim, private va
     }
 
     fun mapCol(
-        col: Int,
-        mapFunction: (BigDecimal) -> BigDecimal
+        col: Int, mapFunction: (BigDecimal) -> BigDecimal
     ) {
         for (i in 0..<dim) {
             matrixArray[i][col] = mapFunction(matrixArray[i][col])
@@ -148,9 +134,7 @@ open class Matrix(private val dim: Int, private val dimY : Int = dim, private va
     }
 
     open fun applyVectorToRow(
-        row: Int,
-        vector: Array<BigDecimal>,
-        operation: (BigDecimal, BigDecimal) -> BigDecimal
+        row: Int, vector: Array<BigDecimal>, operation: (BigDecimal, BigDecimal) -> BigDecimal
     ) {
 
         for (i in 0..<dim) {

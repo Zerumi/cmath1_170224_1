@@ -2,7 +2,7 @@ package math
 
 import org.example.math.Matrix
 import org.example.math.MatrixUtils
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import java.math.BigDecimal
 import kotlin.test.BeforeTest
 import kotlin.test.Test

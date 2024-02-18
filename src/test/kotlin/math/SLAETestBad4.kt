@@ -4,9 +4,8 @@ import org.example.math.ExtendedMatrix
 import org.example.math.Matrix
 import org.example.math.SLAE
 import org.example.math.SLAESolutionStatus
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-
-import org.junit.jupiter.api.Assertions.*
 import java.math.BigDecimal
 import kotlin.test.BeforeTest
 

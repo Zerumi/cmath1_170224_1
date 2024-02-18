@@ -21,18 +21,16 @@ class ExtendedMatrix(
     constructor(matrix: ExtendedMatrix) : this(matrix as Matrix)
 
     fun setExtendedVector(vector: Array<BigDecimal>) {
-        for (i in vector.indices)
-            vector[i] = vector[i].setScale(this.getValueScale(), RoundingMode.HALF_UP)
+        for (i in vector.indices) vector[i] = vector[i].setScale(this.getValueScale(), RoundingMode.HALF_UP)
         this.setMatrixCol(this.getDimension(), vector)
     }
 
     override fun applyVectorToRow(
-        row: Int,
-        vector: Array<BigDecimal>,
-        operation: (BigDecimal, BigDecimal) -> BigDecimal
+        row: Int, vector: Array<BigDecimal>, operation: (BigDecimal, BigDecimal) -> BigDecimal
     ) {
         setMatrixElement(
-            row, this.getDimension(),
+            row,
+            this.getDimension(),
             operation(this.getMatrixElement(row, this.getDimension()), vector[this.getDimension()])
         )
         super.applyVectorToRow(row, vector, operation)

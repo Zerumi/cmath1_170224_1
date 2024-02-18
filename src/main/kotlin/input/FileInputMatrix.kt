@@ -7,7 +7,8 @@ class FileInputMatrix() : InputMatrix {
 
     private var filepathInitialized = false
     private var filepath = ""
-    constructor(filepath : String) : this() {
+
+    constructor(filepath: String) : this() {
         this.filepath = filepath
         filepathInitialized = true
     }
@@ -21,8 +22,7 @@ class FileInputMatrix() : InputMatrix {
 
         val file = File(filepath)
 
-        if (!file.canRead())
-            throw IllegalArgumentException()
+        if (!file.canRead()) throw IllegalArgumentException()
 
         val lines = file.useLines { it.toList() }
 

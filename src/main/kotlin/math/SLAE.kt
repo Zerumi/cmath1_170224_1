@@ -10,16 +10,13 @@ class SLAE(
 
     fun solveSLAE(): SLAESolution {
 
-        if (!MatrixUtils.bringMatrixToValidForm(matrix))
-            return SLAESolution.invalidMatrix(matrix)
+        if (!MatrixUtils.bringMatrixToValidForm(matrix)) return SLAESolution.invalidMatrix(matrix)
 
         MatrixUtils.triangleMatrix(matrix)
 
-        if (MatrixUtils.checkZeroVectors(matrix))
-            return SLAESolution.infiniteSolutions(matrix)
+        if (MatrixUtils.checkZeroVectors(matrix)) return SLAESolution.infiniteSolutions(matrix)
 
-        if (MatrixUtils.checkZeroInSquare(matrix))
-            return SLAESolution.incompatible(matrix)
+        if (MatrixUtils.checkZeroInSquare(matrix)) return SLAESolution.incompatible(matrix)
 
         return SLAESolution.ok(matrix, solveForDiagMatrix())
     }

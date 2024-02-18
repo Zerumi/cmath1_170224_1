@@ -7,14 +7,13 @@ import org.example.input.FileInputMatrix
 import org.example.input.InputMatrix
 import org.example.math.*
 
-fun main(args : Array<String>) {
+fun main(args: Array<String>) {
 
-    val inputMatrix : InputMatrix
+    val inputMatrix: InputMatrix
 
     if (args.isNotEmpty()) {
         inputMatrix = FileInputMatrix(args[0])
-    }
-    else {
+    } else {
 
         println("Welcome to SLAE solver program")
         println("Select input format: file/console (console by default)")
@@ -42,19 +41,21 @@ fun main(args : Array<String>) {
     val slae = SLAE(matrixToSolve)
     val solution = slae.solveSLAE()
 
-    println(when(solution.status) {
-        SLAESolutionStatus.OK -> "Found a solution"
-        SLAESolutionStatus.INVALID_MATRIX -> "SLAE matrix was invalid or SLAE has uncountable amount of solutions"
-        SLAESolutionStatus.INFINITE_SOLUTIONS -> "SLAE has uncountable amount of solutions"
-        SLAESolutionStatus.INCOMPATIBLE -> "SLAE has no solutions"
-    })
+    println(
+        when (solution.status) {
+            SLAESolutionStatus.OK -> "Found a solution"
+            SLAESolutionStatus.INVALID_MATRIX -> "SLAE matrix was invalid or SLAE has uncountable amount of solutions"
+            SLAESolutionStatus.INFINITE_SOLUTIONS -> "SLAE has uncountable amount of solutions"
+            SLAESolutionStatus.INCOMPATIBLE -> "SLAE has no solutions"
+        }
+    )
 
     if (solution.status == SLAESolutionStatus.OK) {
         val checker = SLAESolutionChecker(solution)
         val errorArray = checker.calculateResidualVector()
         println("Solution | Residual Error: ")
         for (i in solution.solutionVector.indices) {
-            println("x${i+1}: ${solution.solutionVector[i].toPlainString()} | ${errorArray[i].toPlainString()}")
+            println("x${i + 1}: ${solution.solutionVector[i].toPlainString()} | ${errorArray[i].toPlainString()}")
         }
     }
 }

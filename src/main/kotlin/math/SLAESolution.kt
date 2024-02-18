@@ -3,14 +3,11 @@ package org.example.math
 import java.math.BigDecimal
 
 data class SLAESolution(
-    val status: SLAESolutionStatus,
-    val sourceSystem : ExtendedMatrix,
-    val solutionVector: Array<BigDecimal>
+    val status: SLAESolutionStatus, val sourceSystem: ExtendedMatrix, val solutionVector: Array<BigDecimal>
 ) {
     companion object {
         fun ok(
-            sourceSystem: ExtendedMatrix,
-            solution: Array<BigDecimal>
+            sourceSystem: ExtendedMatrix, solution: Array<BigDecimal>
         ): SLAESolution {
             return SLAESolution(SLAESolutionStatus.OK, sourceSystem, solution)
         }
