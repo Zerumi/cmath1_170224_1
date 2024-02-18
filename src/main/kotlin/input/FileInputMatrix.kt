@@ -5,12 +5,23 @@ import org.example.math.Matrix
 import java.io.File
 import java.math.BigDecimal
 
-class FileInputMatrix : InputMatrix {
-    override fun inputMatrix(): ExtendedMatrix {
-        println("Write full path to file below: ")
+class FileInputMatrix() : InputMatrix {
 
-        val path = readln()
-        val file = File(path)
+    private var filepathInitialized = false
+    private var filepath = ""
+    constructor(filepath : String) : this() {
+        this.filepath = filepath
+        filepathInitialized = true
+    }
+
+    override fun inputMatrix(): ExtendedMatrix {
+
+        if (!filepathInitialized) {
+            println("Write full path to file below: ")
+            filepath = readln()
+        }
+
+        val file = File(filepath)
 
         if (!file.canRead())
             throw IllegalArgumentException()
