@@ -1,9 +1,7 @@
 package org.example.input
 
 import org.example.math.ExtendedMatrix
-import org.example.math.Matrix
 import java.io.File
-import java.math.BigDecimal
 
 class FileInputMatrix() : InputMatrix {
 
@@ -37,26 +35,6 @@ class FileInputMatrix() : InputMatrix {
 
         val dimension = splitLine0[0].toInt()
 
-        val resultMatrix = Matrix(dimension, scale)
-        val resultExtendedVector = Array<BigDecimal>(dimension) { BigDecimal.ZERO }
-
-        for (i in 1..dimension) {
-            if (lines.size == i) throw IllegalArgumentException()
-
-            val splitLine = lines[i].split(' ')
-
-            if (splitLine.size != dimension + 1) throw IllegalArgumentException()
-
-            for (j in 0..<dimension) {
-                resultMatrix.setMatrixElement(i - 1,j,splitLine[j])
-            }
-            resultExtendedVector[i - 1] = BigDecimal(splitLine[dimension])
-                .setScale(resultMatrix.getValueScale())
-        }
-
-        val resultExtendedMatrix = ExtendedMatrix(resultMatrix)
-        resultExtendedMatrix.setExtendedVector(resultExtendedVector)
-
-        return resultExtendedMatrix
+        return InputUtils.makeMatrixFromInput(dimension, scale, lines)
     }
 }
