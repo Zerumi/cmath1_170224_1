@@ -2,6 +2,7 @@ package org.example.input
 
 import org.example.math.ExtendedMatrix
 import java.io.File
+import java.io.FileNotFoundException
 
 class FileInputMatrix() : InputMatrix {
 
@@ -22,7 +23,7 @@ class FileInputMatrix() : InputMatrix {
 
         val file = File(filepath)
 
-        if (!file.canRead()) throw IllegalArgumentException()
+        if (!file.canRead()) throw FileNotFoundException()
 
         val lines = file.useLines { it.toList() }
 
